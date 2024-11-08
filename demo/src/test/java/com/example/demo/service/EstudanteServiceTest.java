@@ -27,7 +27,7 @@ public class EstudanteServiceTest {
     private EstudanteService service;
 
     @Test
-    void testCadastrarEstudante() {
+    void cadastrarEstudante() {
         String nome = "testNome";
         String matricula = "testMatricula";
 
@@ -39,19 +39,19 @@ public class EstudanteServiceTest {
     }
 
     @Test
-    void testListarEstudantes() {
+    void listarEstudantes() {
         service.listarEstudantes();
         verify(estudanteRepository, times(1)).findAll();
     }
 
     @Test
-    void testBuscarEstudantePorId() {
+    void BuscarEstudantePorId() {
         assertThrows(RuntimeException.class, () -> service.buscarEstudantePorId(defaultId));
         verify(estudanteRepository, times(1)).findById(defaultId);
     }
 
     @Test
-    void testAtualizarEstudante() {
+    void atualizarEstudante() {
         Estudante estudante = new Estudante();
         String novoNome = "testNome";
         String novaMatricula = "testMatricula";
@@ -65,7 +65,7 @@ public class EstudanteServiceTest {
     }
     
     @Test
-    void testRemoverEstudante() {
+    void removerEstudante() {
         service.removerEstudante(defaultId);
         verify(estudanteRepository, times(1)).deleteById(defaultId);
     }

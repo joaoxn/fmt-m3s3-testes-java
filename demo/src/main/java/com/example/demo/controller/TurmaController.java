@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 
+import com.example.demo.controller.dto.TurmaEstudanteRequest;
 import com.example.demo.controller.dto.TurmaRequest;
 import com.example.demo.database.entities.Turma;
 import com.example.demo.service.TurmaService;
@@ -42,5 +43,15 @@ public class TurmaController {
         turmaService.removerTurma(id);
         return ResponseEntity.noContent().build();
 
+    }
+
+    @PostMapping("/estudantes")
+    public ResponseEntity<Turma> cadastrarEstudanteTurma(
+            @RequestBody TurmaEstudanteRequest turmaEstudanteRequest) {
+        turmaService.adicionarEstudanteNaTurma(
+                turmaEstudanteRequest.idTurma(),
+                turmaEstudanteRequest.idEstudante());
+
+        return ResponseEntity.noContent().build();
     }
 }

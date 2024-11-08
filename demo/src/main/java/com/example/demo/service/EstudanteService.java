@@ -4,10 +4,12 @@ import com.example.demo.database.entities.Estudante;
 import com.example.demo.database.repositories.EstudanteRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
 
 @Service
+@RequestMapping("/estudantes")
 @RequiredArgsConstructor
 public class EstudanteService {
 
