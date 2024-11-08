@@ -2,7 +2,6 @@ package com.example.demo.service;
 
 import com.example.demo.database.entities.Estudante;
 import com.example.demo.database.entities.Turma;
-import com.example.demo.database.entities.Turma;
 import com.example.demo.database.repositories.TurmaRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
