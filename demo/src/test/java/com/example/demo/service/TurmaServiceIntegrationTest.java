@@ -2,6 +2,7 @@ package com.example.demo.service;
 
 import com.example.demo.database.entities.Estudante;
 import com.example.demo.database.entities.Turma;
+import com.example.demo.database.repositories.EstudanteRepository;
 import com.example.demo.database.repositories.TurmaRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,9 @@ public class TurmaServiceIntegrationTest {
 
     @MockBean
     private TurmaRepository turmaRepository;
+
+    @MockBean
+    private EstudanteRepository estudanteRepository;
 
     @Autowired
     private TurmaService service;
@@ -70,14 +74,15 @@ public class TurmaServiceIntegrationTest {
     void testAdicionarEstudanteNaTurma() {
         Estudante estudante = new Estudante();
         Turma turma = new Turma();
-        estudante.setTurma(new ArrayList<>());
+        estudante.setTurmas(new ArrayList<>());
 
         when(turmaRepository.findById(defaultId)).thenReturn(Optional.of(turma));
+        when(estudanteRepository.findById(any(Long.class))).thenReturn(Optional.of(estudante));
 
-        Estudante result = service.adicionarEstudanteNaTurma(defaultId, estudante);
+        Estudante result = service.adicionarEstudanteNaTurma(defaultId, defaultId);
 
         assertEquals(estudante, result);
-        assertTrue(result.getTurma().contains(turma));
+        assertTrue(result.getTurmas().contains(turma));
         verify(turmaRepository, times(1)).findById(defaultId);
     }
 
@@ -85,14 +90,14 @@ public class TurmaServiceIntegrationTest {
     void testRemoverEstudanteNaTurma() {
         Estudante estudante = new Estudante();
         Turma turma = new Turma();
-        estudante.setTurma(new ArrayList<>(List.of(new Turma[]{turma})));
+        estudante.setTurmas(new ArrayList<>(List.of(new Turma[]{turma})));
 
         when(turmaRepository.findById(defaultId)).thenReturn(Optional.of(turma));
 
         Estudante result = service.removerEstudanteDaTurma(defaultId, estudante);
 
         assertEquals(estudante, result);
-        assertFalse(result.getTurma().contains(turma));
+        assertFalse(result.getTurmas().contains(turma));
         verify(turmaRepository, times(1)).findById(defaultId);
     }
 }

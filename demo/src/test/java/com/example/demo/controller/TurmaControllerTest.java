@@ -39,14 +39,13 @@ public class TurmaControllerTest {
     @BeforeEach
     public void setUp() {
         estudante = new Estudante();
-        estudante.setId(1L);
-        estudante.setNome("Jefferson");
-        estudante.setMatricula("1234");
+        estudante.setId(0L);
+        estudante.setNome("testNome");
+        estudante.setMatricula("testMatricula");
 
         turma = new Turma();
-        turma.setNome("Estatistica");
-        turma.setId(1L);
-
+        turma.setNome("testNome");
+        turma.setId(0L);
     }
 
     @Test

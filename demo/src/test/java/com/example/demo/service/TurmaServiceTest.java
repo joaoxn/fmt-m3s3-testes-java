@@ -25,6 +25,9 @@ public class TurmaServiceTest {
     @Mock
     private TurmaRepository turmaRepository;
 
+    @Mock
+    private EstudanteService estudanteService;
+
     @InjectMocks
     private TurmaService service;
 
@@ -72,14 +75,15 @@ public class TurmaServiceTest {
     void testAdicionarEstudanteNaTurma() {
         Estudante estudante = new Estudante();
         Turma turma = new Turma();
-        estudante.setTurma(new ArrayList<>());
+        estudante.setTurmas(new ArrayList<>());
 
         when(turmaRepository.findById(defaultId)).thenReturn(Optional.of(turma));
+        when(estudanteService.buscarEstudantePorId(any(Long.class))).thenReturn(estudante);
 
-        Estudante result = service.adicionarEstudanteNaTurma(defaultId, estudante);
+        Estudante result = service.adicionarEstudanteNaTurma(defaultId, defaultId);
 
         assertEquals(estudante, result);
-        assertTrue(result.getTurma().contains(turma));
+        assertTrue(result.getTurmas().contains(turma));
         verify(turmaRepository, times(1)).findById(defaultId);
     }
 
@@ -87,14 +91,14 @@ public class TurmaServiceTest {
     void testRemoverEstudanteNaTurma() {
         Estudante estudante = new Estudante();
         Turma turma = new Turma();
-        estudante.setTurma(new ArrayList<>(List.of(new Turma[]{turma})));
+        estudante.setTurmas(new ArrayList<>(List.of(new Turma[]{turma})));
 
         when(turmaRepository.findById(defaultId)).thenReturn(Optional.of(turma));
 
         Estudante result = service.removerEstudanteDaTurma(defaultId, estudante);
 
         assertEquals(estudante, result);
-        assertFalse(result.getTurma().contains(turma));
+        assertFalse(result.getTurmas().contains(turma));
         verify(turmaRepository, times(1)).findById(defaultId);
     }
 }

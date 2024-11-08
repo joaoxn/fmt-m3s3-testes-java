@@ -48,12 +48,13 @@ public class TurmaService {
         Turma turma = buscarTurmaPorId(turmaId);
 
         turma.getEstudantes().add(estudante);
+        estudante.getTurmas().add(turma);
         return estudante;
     }
 
     public Estudante removerEstudanteDaTurma(Long turmaId, Estudante estudante) {
         Turma turma = buscarTurmaPorId(turmaId);
-        estudante.getTurma().remove(turma);
+        estudante.getTurmas().remove(turma);
         return estudante;
 
     }

@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -21,5 +22,5 @@ public class Estudante {
     private String matricula;
 
     @ManyToMany(mappedBy = "estudantes")
-    private List<Turma> turma;
+    private List<Turma> turmas = new ArrayList<>();
 }
